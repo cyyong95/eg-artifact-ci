@@ -9,7 +9,7 @@ steps:
   displayName: '[Dotnet] Install SDK and Runtime'
   inputs:
     packageType: 'sdk'
-    version: '2.x'
+    version: '6.x'
 
 - task: DotNetCoreCLI@2
   inputs:
