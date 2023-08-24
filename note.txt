@@ -1,0 +1,4 @@
+Install Azure Artifacts Credential Provider if using Mac.
+
+Command to auto install on Mac:
+sh -c "$(curl -fsSL https://aka.ms/install-artifacts-credprovider.sh)"
