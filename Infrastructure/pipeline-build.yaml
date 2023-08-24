@@ -10,6 +10,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  buildConfiguration: 'Release'
+
 steps:
 - task: UseDotNet@2
   displayName: '[Dotnet] Install SDK and Runtime'
@@ -18,7 +21,24 @@ steps:
     version: '7.x'
 
 - task: DotNetCoreCLI@2
+  displayName: '[Dotnet] Build project'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration=Release'
+    arguments: '--configuration=$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: '[Dotnet] Pack class libraries'
+  inputs:
+    command: 'pack'
+    packagesToPack: 'ImportantApp.HardMath/*.csproj;ImportantApp.SimpleMath/*.csproj'
+    configuration: '$(buildConfiguration)'
+    nobuild: true
+    versioningScheme: 'byBuildNumber'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '$(vstsFeed)'
