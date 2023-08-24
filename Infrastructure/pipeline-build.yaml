@@ -1,3 +1,5 @@
+name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
+
 trigger:
   branches:
     include:
@@ -33,10 +35,10 @@ steps:
     command: 'pack'
     packagesToPack: 'ImportantApp.HardMath/*.csproj;ImportantApp.SimpleMath/*.csproj'
     configuration: '$(buildConfiguration)'
-    nobuild: true
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
+  displayName: '[Dotnet] Push NuGet packages to internal feed'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
