@@ -1,5 +1,11 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'ImportantApp.HardMath/*'
+      - 'ImportantApp.SimpleMath/*'
 
 pool:
   vmImage: ubuntu-latest
