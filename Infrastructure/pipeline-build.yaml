@@ -9,6 +9,15 @@ trigger:
       - 'ImportantApp.HardMath/*'
       - 'ImportantApp.SimpleMath/*'
 
+parameters:
+- name: testParameter
+  displayName: 'Test parameter'
+  default: parameter_a
+  values:
+  - parameter_a
+  - parameter_b
+  - parameter_c
+
 pool:
   vmImage: ubuntu-latest
 
