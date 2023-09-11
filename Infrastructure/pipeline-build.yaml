@@ -26,7 +26,9 @@ steps:
   displayName: '[Dotnet] Build project'
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
+    projects: |
+      ImportantApp.SimpleMath/*.csproj
+      ImportantApp.HardMath/*.csproj
     arguments: '--configuration=$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
